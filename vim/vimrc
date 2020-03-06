@@ -1,0 +1,112 @@
+set t_Co=256
+colorscheme delek
+
+" Syntax highlighting
+syntax on
+
+" Treat *.md as markdown
+au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+
+filetype plugin on
+
+set laststatus=2
+
+set ruler
+
+" System clipboard as default
+set clipboard=unnamed
+
+set backspace=indent,eol,start
+
+" Extra VIM features
+set nocompatible
+set updatetime=500
+
+" Swap ; and :
+nnoremap ; :
+vnoremap ; :
+
+" Keep selection after indent
+vnoremap > >gv
+vnoremap < <gv
+
+" Tabs and auto-indentation
+set autoindent
+set expandtab
+set shiftwidth=2
+set tabstop=2
+
+" Highlight search terms automatically and disable with <Space>
+set hlsearch
+nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+hi Search cterm=NONE ctermfg=black ctermbg=yellow
+" Center search terms on screen
+nnoremap n nzz
+nnoremap N Nzz
+" * key doesn't move cursor
+nnoremap * *<C-o>
+
+" Rename word under cursor
+nnoremap 8 *:%s/\<<C-r><C-w>\>//g<Left><Left>
+
+" H and L for line start and end
+noremap H ^
+noremap L $
+
+nnoremap <C-j> :m .+1<CR>
+nnoremap <C-k> :m .-2<CR>
+vnoremap <C-j> :m '>+1<CR>gv
+vnoremap <C-k> :m '<-2<CR>gv
+
+nnoremap <silent> { ?^\s*$<CR>:noh<CR>
+nnoremap <silent> } /^\s*$<CR>:noh<CR>
+
+" Perform macro for each line in selection
+vnoremap @ :normal @q<CR>
+
+" match ErrorMsg '\s\+$'
+set list listchars=tab:│\ ,trail:·
+hi SpecialKey ctermfg=Grey
+
+hi Visual cterm=reverse ctermbg=black
+
+" Better matching brace colors
+hi MatchParen cterm=underline ctermbg=none ctermfg=green
+
+" Folding settings
+set foldmethod=indent
+set nofoldenable
+set foldnestmax=10
+set fillchars=fold:\ 
+hi Folded ctermfg=darkgray ctermbg=none
+
+" Buffer navigation
+set hidden " Allow hiding modified buffers
+nnoremap <Tab> :bnext<CR>:buffers<CR>
+nnoremap <S-Tab> :bprev<CR>:buffers<CR>
+
+" Status line
+set statusline=%#Folded# "highlight color group
+set statusline+=%t       "tail of the filename
+set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
+set statusline+=%{&ff}] "file format
+set statusline+=%h      "help file flag
+set statusline+=%m      "modified flag
+set statusline+=%r      "read only flag
+set statusline+=%y      "filetype
+set statusline+=%=      "left/right separator
+set statusline+=%c,     "cursor column
+set statusline+=%l/%L   "cursor line/total lines
+set statusline+=\ %P    "percent through file
+
+" Spell check
+hi SpellBad cterm=underline,italic ctermfg=red ctermbg=NONE
+hi SpellCap cterm=underline,italic ctermfg=green ctermbg=NONE
+hi SpellRare cterm=underline,italic ctermfg=cyan ctermbg=NONE
+autocmd FileType gitcommit setlocal spell
+autocmd FileType text setlocal spell
+autocmd FileType markdown setlocal spell
+
+" Use FZF with ^p
+set rtp+=/usr/local/opt/fzf
+nnoremap <c-p> :FZF<CR>

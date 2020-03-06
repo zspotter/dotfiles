@@ -1,0 +1,3 @@
+#!/bin/bash
+# https://www.iterm2.com/documentation-escape-codes.html
+printf "\ePtmux;\e\e]50;SetProfile=$@\a\e\\"

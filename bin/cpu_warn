@@ -1,0 +1,24 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# Formatted for tmux statusbar
+
+import subprocess
+import string
+
+MINCPU = 90
+WIDTH = 30
+
+top = subprocess.check_output("ps -rceo pcpu,comm | head -n 2 | tail -n 1", shell=True).strip()
+cpu = float(top[:top.find(" ")])
+proc = top[top.find(" ")+1:]
+
+if cpu >= MINCPU:
+    cpuline = " " + str(cpu) + "% "
+    proclen = WIDTH - len(cpuline) - 1
+    if len(proc) > proclen:
+        proc = proc[:(proclen - 1)] + "…"
+
+    cpuline = " " + proc + cpuline
+    print cpuline
+

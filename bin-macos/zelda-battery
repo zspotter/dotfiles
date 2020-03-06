@@ -1,0 +1,28 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# Formatted for tmux statusbar
+
+import subprocess
+from math import ceil
+
+NHEARTS = 3
+
+binput = subprocess.check_output("pmset -g ps | grep -o '[0-9]\\+%; [^;]\\+'", shell=True).strip().split("; ")
+
+if binput[0] == "AC Power":
+    binput = ["100%", ""]
+
+discharging = (binput[1] == "discharging")
+battery = int(binput[0][:-1])
+
+nfull = max(0, int(ceil( battery * (NHEARTS + 1) / 100.0 - 1)))
+
+bline = ("♥️ " * nfull) + ("💀" * (NHEARTS - nfull))
+if battery <= 10:
+	bline = "#[blink]" + bline + "#[noblink]"
+if battery <= 75:
+	bline = str(battery) + "%" + ("" if discharging else "⚡️") + " " + bline
+
+print bline
+

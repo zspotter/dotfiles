@@ -1,0 +1,74 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# Usage: treef [-e]
+#
+# Reads lines from standard input and formats common directories into a tree
+# for easy eyeball parsing.
+#
+# Options:
+#    -e    Expands all paths
+#
+# Example:
+#    To find all files with TODO notes and view results in a tree:
+#        grep -rl 'TODO' * | treef
+
+import os
+import sys
+
+BLANK =    '  '
+SKIP =     '│ '
+BULLET =   '├ '
+END_CAP =  '└ '
+
+def make_tree(source):
+    numPaths = 0
+    paths = {}
+    for path in source:
+        numPaths += 1
+        root = paths
+        for part in path_parts(path.strip()):
+            if not part in root:
+                root[part] = {}
+            root = root[part]
+    return paths, numPaths
+
+def flatten(paths):
+    flat = {}
+    for branch in paths.keys():
+        sub = flatten(paths[branch])
+        if len(sub.keys()) == 1:
+            subsub = sub.keys()[0]
+            flat[os.path.join(branch, subsub)] = sub[subsub]
+        else:
+            flat[branch] = sub
+    return flat
+
+def path_parts(path):
+    if path == '':
+        return []
+    head, tail = os.path.split(path)
+    if head == path:
+        return [head]
+    if tail == '':
+        return path_parts(head)
+    return path_parts(head) + [tail]
+
+def print_tree(paths, prefix = '', sub = False):
+    parts = sorted(paths.keys())
+    for part in parts:
+        last = (part == parts[-1])
+        bullet = ('' if not sub else END_CAP if last else BULLET)
+        print(prefix + bullet + part)
+        nextprefix = prefix + ('' if not sub else BLANK if last else SKIP)
+        print_tree(paths[part], nextprefix, True)
+
+#===
+
+tree, numPaths = make_tree(sys.stdin)
+if not "-e" in sys.argv:
+    tree = flatten(tree)
+
+print_tree(tree)
+print('\n' + str(numPaths) + ' paths')
+

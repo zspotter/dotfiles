@@ -1,0 +1,29 @@
+#!/bin/bash
+#
+# Caches and replays stdout of any command.
+# Usage:
+#	cache [-r] <cmd>
+#
+# Options:
+#	-r	Refresh: rebuild cache for cmd
+#
+
+CACHEDIR="/tmp/cmdcache"
+if [ ! -e "$CACHEDIR" ]; then
+	mkdir "$CACHEDIR"
+fi
+
+REFRESH=false
+if [ "$1" = "-r" ]; then
+	REFRESH=true
+	shift
+fi
+
+CMD="$@"
+CACHEPATH="$CACHEDIR/$(md5 -qs "$CMD")"
+
+if [ ! -f "$CACHEPATH" ] || [ "$REFRESH" = true ]; then
+	eval $CMD > "$CACHEPATH"
+fi
+
+cat "$CACHEPATH"

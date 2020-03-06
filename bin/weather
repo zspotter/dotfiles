@@ -1,0 +1,53 @@
+#!/bin/bash
+
+REFRESH="10" # Cache expires every $REFRESH minutes
+ZIP="94110"
+APPID="f6df12d98818ca6bd3f2dd5caec11d45"
+
+CACHE="/tmp/weather"
+LOG="/tmp/weather.log" # set empty for no log
+
+function icon() {
+	echo "$@" \
+	| sed "s/clear sky/☀️ /g" \
+	| sed "s/few clouds/🌤 /g" \
+	| sed "s/broken clouds/🌤 /g" \
+	| sed "s/.*clouds/☁️ /g" \
+	| sed "s/shower rain/🌦 /g" \
+	| sed "s/rain/🌧 /g" \
+	| sed "s/thunderstorm/🌩 /g" \
+	| sed "s/snow/🌨 /g" \
+	| sed "s/haze/🌫 /g" \
+	| sed "s/mist/🌫 /g"
+}
+
+function log() {
+	[[ -z "$LOG" ]] || echo "[$(date)] $@" >> "$LOG"
+	# only keep last 20 lines of log
+	tail -n 20 "$LOG" > "$LOG-tail"
+	mv "$LOG-tail" "$LOG"
+}
+
+if [ ! -e "$CACHE-flight" ] && ([ ! -e "$CACHE" ] || [ -n "$(find $CACHE -mmin +$REFRESH)" ])
+then
+	touch $CACHE-flight
+	log "Updating cache"
+	rm $CACHE
+
+	WEATHER=`curl --max-time 10 "http://api.openweathermap.org/data/2.5/weather?APPID=$APPID&units=imperial&zip=$ZIP,us"`
+	TEMP=`echo "$WEATHER" | grep -o '"temp":[0-9]\+' | grep -o '[0-9]\+$'`
+	SKY=`echo "$WEATHER" | grep -o '"description":"[^"]\+"' | grep -m1 -o ':"[^"]*' | cut -b 3-`
+	echo -n "$(icon $SKY) ${TEMP}" > "$CACHE-flight"
+
+	log "Received: $WEATHER"
+	mv "$CACHE-flight" "$CACHE"
+fi
+
+CACHED="$(cat $CACHE)"
+if [ -z "$CACHED" ]
+then
+	echo "--°F"
+else
+	echo "${CACHED}°F"
+fi
+
