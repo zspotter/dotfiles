@@ -1,7 +1,7 @@
 -- TODO make these paths relative
-dofile("/Users/zpotter/Dropbox/rcs/hammerspoon/keymap.lua")
-dofile("/Users/zpotter/Dropbox/rcs/hammerspoon/windows.lua")
-dofile("/Users/zpotter/Dropbox/rcs/hammerspoon/eyebreak.lua")
+dofile("/Users/zpotter/dotfiles/hammerspoon/keymap.lua")
+dofile("/Users/zpotter/dotfiles/hammerspoon/windows.lua")
+dofile("/Users/zpotter/dotfiles/hammerspoon/eyebreak.lua")
 
 -- Show UTC time in menubar
 -- local utcMenuBar = hs.menubar.new()

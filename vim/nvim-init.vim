@@ -1,4 +1,4 @@
-source ~/.vimrc
+source ~/dotfiles/vim/vimrc
 
 "dein Scripts-----------------------------
 if &compatible
