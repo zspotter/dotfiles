@@ -5,13 +5,13 @@ if &compatible
   set nocompatible               " Be iMproved
 endif
 
-set runtimepath+=/Users/zpotter/.config/nvim/repos/github.com/Shougo/dein.vim
+set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim
 
-if dein#load_state('/Users/zpotter/.config/nvim/')
-  call dein#begin('/Users/zpotter/.config/nvim/')
+if dein#load_state('~/.config/nvim/')
+  call dein#begin('~/.config/nvim/')
 
   " Let dein manage dein
-  call dein#add('/Users/zpotter/.config/nvim/repos/github.com/Shougo/dein.vim')
+  call dein#add('~/.config/nvim/repos/github.com/Shougo/dein.vim')
 
   call dein#add('sudar/vim-arduino-syntax')
 
