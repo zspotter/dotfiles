@@ -37,4 +37,4 @@ fi
 ##   test -z "$TMUX" && (tmux)
 ## fi
 
-motd
+#motd

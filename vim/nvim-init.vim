@@ -15,10 +15,15 @@ if dein#load_state('~/.config/nvim/')
 
   call dein#add('sudar/vim-arduino-syntax')
 
-  call dein#add('pangloss/vim-javascript')
-  call dein#add('mxw/vim-jsx')
-
   call dein#add('airblade/vim-gitgutter')
+
+  " VSCode style autocomplete
+  " After first time install, execute:
+  "   :CocInstall coc-eslint coc-tsserver coc-tslint-plugin
+  call dein#add('neoclide/coc.nvim', {'merged':0, 'rev': 'release'})
+
+  "call dein#add('ianks/vim-tsx')
+  "call dein#add('leafgarland/typescript-vim')
 
   call dein#end()
   call dein#save_state()
@@ -35,3 +40,8 @@ endif
 "End dein Scripts-------------------------
 
 colorscheme noctu
+
+au BufNewFile,BufRead *.ts setlocal filetype=typescript
+au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
+
+source ~/dotfiles/vim/coc.vim
