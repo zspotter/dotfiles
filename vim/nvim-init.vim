@@ -13,17 +13,15 @@ if dein#load_state('~/.config/nvim/')
   " Let dein manage dein
   call dein#add('~/.config/nvim/repos/github.com/Shougo/dein.vim')
 
-  call dein#add('sudar/vim-arduino-syntax')
-
+  " Show git hints in the gutter
   call dein#add('airblade/vim-gitgutter')
 
-  " VSCode style autocomplete
-  " After first time install, execute:
-  "   :CocInstall coc-eslint coc-tsserver coc-tslint-plugin
-  call dein#add('neoclide/coc.nvim', {'merged':0, 'rev': 'release'})
+  " Assortment of syntax/indent support for many languages, including
+  " typescript and jsx
+  call dein#add('sheerun/vim-polyglot')
 
-  "call dein#add('ianks/vim-tsx')
-  "call dein#add('leafgarland/typescript-vim')
+  " VSCode style autocomplete
+  call dein#add('neoclide/coc.nvim', {'merged':0, 'rev': 'release'})
 
   call dein#end()
   call dein#save_state()

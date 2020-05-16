@@ -1,3 +1,6 @@
+let g:coc_config_home = '~/dotfiles/vim'
+let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-highlight']
+
 " Sample config from coc.vim's README
 
 " TextEdit might fail if hidden is not set.
@@ -70,6 +73,7 @@ endfunction
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
+" highlight CocHighlightText term=underline gui=underline
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
@@ -106,8 +110,8 @@ omap af <Plug>(coc-funcobj-a)
 " Use <TAB> for selections ranges.
 " NOTE: Requires 'textDocument/selectionRange' support from the language server.
 " coc-tsserver, coc-python are the examples of servers that support it.
-nmap <silent> <TAB> <Plug>(coc-range-select)
-xmap <silent> <TAB> <Plug>(coc-range-select)
+"" nmap <silent> <TAB> <Plug>(coc-range-select)
+"" xmap <silent> <TAB> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
@@ -125,18 +129,18 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings using CoCList:
 " Show all diagnostics.
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" Show commands.
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+"" nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+"" " Manage extensions.
+"" nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+"" " Show commands.
+"" nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+"" " Find symbol of current document.
+"" nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+"" " Search workspace symbols.
+"" nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+"" " Do default action for next item.
+"" nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+"" " Do default action for previous item.
+"" nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+"" " Resume latest coc list.
+"" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
