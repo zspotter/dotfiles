@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if [ -z "$TMUX" ];
+then
+  echo 'tmux session not active'
+  exit 1
+else
+  tmux capture-pane -peJ | fpp
+fi
