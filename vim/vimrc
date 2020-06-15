@@ -1,5 +1,5 @@
-set t_Co=256
 colorscheme delek
+" TODO: set termguicolors
 
 let mapleader = ' '
 
@@ -46,7 +46,8 @@ hi Search cterm=NONE ctermfg=black ctermbg=yellow
 nnoremap n nzz
 nnoremap N Nzz
 " * key doesn't move cursor
-nnoremap * *<C-o>
+" nnoremap * *<C-o>
+nnoremap * *Nzz
 
 " Rename word under cursor
 nnoremap 8 *:%s/\<<C-r><C-w>\>//g<Left><Left>

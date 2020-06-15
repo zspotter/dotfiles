@@ -1,0 +1,4 @@
+--type-add
+ts:*.ts,*.tsx
+--type-add
+ts:include:js

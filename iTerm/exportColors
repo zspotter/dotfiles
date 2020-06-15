@@ -1,0 +1,39 @@
+#!/usr/local/bin/node
+
+const fs = require('fs');
+const util = require('util');
+
+const readFile = util.promisify(fs.readFile);
+
+function rgbToHex(r, g, b) {
+  return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
+
+async function main() {
+  if (process.argv.length !== 3) {
+    console.log('Converts iTerm2 profile exports to ');
+    console.log('Usage: exportColors iTermExport.json');
+    return;
+  }
+  const filePath = process.argv[2];
+  let profile;
+  await readFile(filePath, 'utf8')
+    .then(data => profile = JSON.parse(data))
+    .catch(err => { throw err });
+
+  for (const [key, val] of Object.entries(profile)) {
+    if (!key || !key.endsWith('Color')) 
+      continue;
+
+    const hex = rgbToHex(
+      Math.round(val['Red Component'] * 255),
+      Math.round(val['Green Component'] * 255),
+      Math.round(val['Blue Component'] * 255),
+    );
+
+    console.log(`${key}: ${hex}`);
+  }
+
+}
+
+main().then();
