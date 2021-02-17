@@ -65,4 +65,28 @@ colorscheme palenight
 au BufNewFile,BufRead *.ts setlocal filetype=typescript
 au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
 
+" Block char gitgutter to simulate background color
+let g:gitgutter_sign_added = '█'
+let g:gitgutter_sign_modified = '▊'
+let g:gitgutter_sign_removed = '█'
+let g:gitgutter_sign_removed_first_line = '█'
+let g:gitgutter_sign_removed_above_and_below = '█'
+let g:gitgutter_sign_modified_removed = '█'
+
+" let g:gitgutter_sign_added = '🌱'
+" let g:gitgutter_sign_modified = '🌼'
+" let g:gitgutter_sign_removed = '🥀'
+" let g:gitgutter_sign_removed_first_line = '🔺'
+" let g:gitgutter_sign_removed_above_and_below = '🍷'
+" let g:gitgutter_sign_modified_removed = '🦞'
+
+execute 'highlight GitGutterAdd guifg='    . g:palenight_color_overrides.green.gui
+execute 'highlight GitGutterChange guifg=' . g:palenight_color_overrides.blue_purple.gui
+execute 'highlight GitGutterDelete guifg=' . g:palenight_color_overrides.red.gui
+
+"" BG colors for git gutter
+" execute 'highlight GitGutterAdd    guibg=' . g:palenight_color_overrides.green.gui  . ' ctermbg=2   guifg=white ctermfg=7'
+" execute 'highlight GitGutterChange guibg=' . g:palenight_color_overrides.yellow.gui . ' ctermbg=3   guifg=white ctermfg=7'
+" execute 'highlight GitGutterDelete guibg=' . g:palenight_color_overrides.red.gui    . ' ctermbg=1   guifg=white ctermfg=7'
+
 source ~/dotfiles/vim/coc.vim

@@ -1,5 +1,5 @@
 let g:coc_config_home = '~/dotfiles/vim'
-let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-highlight']
+let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-highlight', 'coc-jedi']
 
 " Sample config from coc.vim's README
 
@@ -74,6 +74,7 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 highlight CocHighlightText term=underline gui=underline
+highlight CocErrorHighlight guifg='red' gui=underline
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)

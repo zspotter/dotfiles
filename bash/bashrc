@@ -35,6 +35,13 @@ export FPP_DISABLE_SPLIT=1
 
 export RIPGREP_CONFIG_PATH="$DOTDIR/bash/ripgreprc"
 
+# Make FZF respect .gitignore by searching with ripgrep
+export FZF_DEFAULT_COMMAND='rg --files'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+_fzf_compgen_path() {
+  exec $FZF_DEFAULT_COMMAND
+}
+
 # Auto-launch tmux
 ## if which tmux >/dev/null 2>&1; then
 ##   #if not inside a tmux session, and if no session is started, start a new session
