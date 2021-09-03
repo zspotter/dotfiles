@@ -58,10 +58,16 @@ noremap L $
 vnoremap H ^
 vnoremap L $
 
+" Move and indent lines
 nnoremap <C-j> :m .+1<CR>
 nnoremap <C-k> :m .-2<CR>
 vnoremap <C-j> :m '>+1<CR>gv
 vnoremap <C-k> :m '<-2<CR>gv
+
+nnoremap <C-h> <<
+nnoremap <C-l> >>
+vnoremap <C-h> <<gv
+vnoremap <C-l> >>gv
 
 nnoremap <silent> { ?^\s*$<CR>:noh<CR>
 nnoremap <silent> } /^\s*$<CR>:noh<CR>
