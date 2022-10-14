@@ -1,7 +1,7 @@
 #!/bin/bash
 
 REFRESH="10" # Cache expires every $REFRESH minutes
-ZIP="94110"
+ZIP="94118"
 APPID="f6df12d98818ca6bd3f2dd5caec11d45"
 
 CACHE="/tmp/weather"
@@ -18,7 +18,8 @@ function icon() {
 	| sed "s/thunderstorm/🌩 /g" \
 	| sed "s/snow/🌨 /g" \
 	| sed "s/haze/🌫 /g" \
-	| sed "s/mist/🌫 /g"
+	| sed "s/mist/🌫 /g"\
+	| sed "s/smoke/🚭/g"
 }
 
 function log() {

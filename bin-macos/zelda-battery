@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 # Formatted for tmux statusbar
@@ -8,7 +8,8 @@ from math import ceil
 
 NHEARTS = 3
 
-binput = subprocess.check_output("pmset -g ps | grep -o '[0-9]\\+%; [^;]\\+'", shell=True).strip().split("; ")
+shout = subprocess.check_output("pmset -g ps | grep -o '[0-9]\\+%; [^;]\\+'", shell=True)
+binput = str(shout, 'utf-8').strip().split("; ")
 
 if binput[0] == "AC Power":
     binput = ["100%", ""]
@@ -24,5 +25,5 @@ if battery <= 10:
 if battery <= 75:
 	bline = str(battery) + "%" + ("" if discharging else "⚡️") + " " + bline
 
-print bline
+print(bline)
 

@@ -44,6 +44,14 @@ endif
 
 "End dein Scripts-------------------------
 
+func! Dprint_format()
+    let save_cursor = getcurpos()
+    exe '%!dprint fmt --stdin %'
+    call setpos('.', save_cursor)
+endfunc
+command! -nargs=0 FM :call Dprint_format()
+" autocmd BufWritePre *.ts,*.tsx,*.js,*.jsx,*.cjs,*.mjs,*.json :call Dprint_format()
+
 set background=dark
 set termguicolors
 let g:palenight_terminal_italics=1

@@ -5,7 +5,9 @@
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
 
-  "diagnostic.virtualText": true,
+  "python.formatting.provider": "black",
+
+  "diagnostic.virtualText": false,
   "diagnostic.virtualTextCurrentLineOnly": false,
   "diagnostic.virtualTextPrefix": "🐸💬 "
 }
